@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<meta name="description" content="CodeRamp: practice floor for new medical coders. Synthetic charts, instant scoring, CCA/CPC exam prep.">
+<meta name="description" content="CodeRamp: practice floor for new medical coders. Synthetic charts, personal coaching, hiring test, exam fund, CEU tracking.">
 <title>CodeRamp Trainer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,51 +13,48 @@
 :root{
   --ground:#f2f4f3; --surface:#ffffff; --surface-2:#e8ecea; --ink:#17201c; --muted:#5a6560; --line:#d5dcd8;
   --accent:#1f4fbf; --accent-soft:#dfe7fa; --good:#1b7a45; --good-soft:#dcf0e3; --bad:#b3261e; --bad-soft:#f8dedb;
-  --part:#9a5c00; --part-soft:#f7e8cc; --paper:#fbfbf7;
+  --part:#9a5c00; --part-soft:#f7e8cc; --paper:#fbfbf7; --on-accent:#ffffff;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
     --ground:#0f1412; --surface:#161d1a; --surface-2:#1e2723; --ink:#e4ebe7; --muted:#9aa7a1; --line:#2b3632;
     --accent:#7d9cff; --accent-soft:#1b2747; --good:#5fd08f; --good-soft:#15301f; --bad:#ff8a80; --bad-soft:#3a1916;
-    --part:#f0b45a; --part-soft:#36280f; --paper:#1a211e;
+    --part:#f0b45a; --part-soft:#36280f; --paper:#1a211e; --on-accent:#0f1412;
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
   --ground:#0f1412; --surface:#161d1a; --surface-2:#1e2723; --ink:#e4ebe7; --muted:#9aa7a1; --line:#2b3632;
   --accent:#7d9cff; --accent-soft:#1b2747; --good:#5fd08f; --good-soft:#15301f; --bad:#ff8a80; --bad-soft:#3a1916;
-  --part:#f0b45a; --part-soft:#36280f; --paper:#1a211e;
+  --part:#f0b45a; --part-soft:#36280f; --paper:#1a211e; --on-accent:#0f1412;
 }
 *{box-sizing:border-box}
 body{background:var(--ground);color:var(--ink);font:400 16px/1.55 "Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;padding-inline:16px;padding-block:20px 56px}
 .wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
 h1,h2,h3{margin:0;line-height:1.15;text-wrap:balance}
-h1{font-size:22px}
-h2{font-size:20px}
-h3{font-size:16px}
+h1{font-size:22px} h2{font-size:20px} h3{font-size:16px}
 p{margin:0}
-.mono,code,input.code{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
-.muted{color:var(--muted)}
-.small{font-size:13.5px}
+.mono,input.code{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+.muted{color:var(--muted)} .small{font-size:13.5px}
+.stack{display:flex;flex-direction:column;gap:12px}
 header.top{display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:12px}
-.mark{width:36px;height:36px;border-radius:8px;background:var(--accent);color:var(--surface);display:grid;place-items:center;font:600 13px "JetBrains Mono",monospace}
+.mark{width:36px;height:36px;border-radius:8px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font:600 13px "JetBrains Mono",monospace}
 .tabs{display:flex;gap:4px;background:var(--surface-2);padding:4px;border-radius:10px;flex-wrap:wrap}
-.tab{border:0;background:transparent;color:var(--muted);font:700 14px "Atkinson Hyperlegible",sans-serif;padding:8px 14px;border-radius:7px;cursor:pointer}
+.tab{border:0;background:transparent;color:var(--muted);font:700 14px "Atkinson Hyperlegible",sans-serif;padding:8px 12px;border-radius:7px;cursor:pointer}
 .tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .notice{font-size:13px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
 .notice b{color:var(--ink)}
-
-/* practice */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
+.grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:20px;align-items:start}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
 .cases{display:flex;gap:8px;flex-wrap:wrap}
 .case-chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 12px;font:400 13.5px "Atkinson Hyperlegible",sans-serif;cursor:pointer;display:flex;gap:8px;align-items:center}
 .case-chip[aria-current="true"]{border-color:var(--accent);background:var(--accent-soft)}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--line)}
 .dot.good{background:var(--good)} .dot.part{background:var(--part)} .dot.bad{background:var(--bad)}
-.grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:20px;align-items:start}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
 .chart{background:var(--paper);font-size:15px}
 .chart-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}
 .synth{font:600 11px "JetBrains Mono",monospace;letter-spacing:.06em;color:var(--part);background:var(--part-soft);padding:3px 8px;border-radius:5px}
@@ -66,74 +63,76 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid 
 .chart dd{margin:0}
 .level{font:600 11px "JetBrains Mono",monospace;padding:2px 7px;border-radius:5px;background:var(--surface-2);color:var(--muted)}
 .form{display:flex;flex-direction:column;gap:16px}
-.block-h{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.block-h{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
 .rows{display:flex;flex-direction:column;gap:8px}
 .row{display:grid;grid-template-columns:28px minmax(0,1fr) 32px;gap:8px;align-items:center}
-.row.px{grid-template-columns:28px minmax(0,1fr) 110px 64px 32px}
+.row.px,.colh{grid-template-columns:28px minmax(0,1fr) 110px 64px 32px}
+.colh{display:grid;gap:8px;font-size:12px;color:var(--muted)}
 .row .n{font:600 12px "JetBrains Mono",monospace;color:var(--muted);text-align:center}
-input.code,input.mod,input.units{width:100%;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink)}
+input,select,textarea{font:400 15px "Atkinson Hyperlegible",sans-serif;padding:8px 10px;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink);width:100%}
 input.code{text-transform:uppercase}
+input.mod,input.units{font-family:"JetBrains Mono",monospace}
+textarea{min-height:70px;resize:vertical}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:13.5px;color:var(--muted)}
+label.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px}
+label.chk input{width:auto;margin-top:3px}
 .x{border:0;background:transparent;color:var(--muted);font-size:18px;cursor:pointer;border-radius:6px;height:32px}
 .x:hover{background:var(--surface-2)}
 .add{border:1px dashed var(--line);background:transparent;color:var(--accent);font:700 13.5px "Atkinson Hyperlegible",sans-serif;padding:6px 12px;border-radius:7px;cursor:pointer}
-.colh{display:grid;grid-template-columns:28px minmax(0,1fr) 110px 64px 32px;gap:8px;font-size:12px;color:var(--muted)}
 .actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.btn{border:0;background:var(--accent);color:var(--surface);font:700 15px "Atkinson Hyperlegible",sans-serif;padding:10px 18px;border-radius:8px;cursor:pointer}
+.btn{border:0;background:var(--accent);color:var(--on-accent);font:700 15px "Atkinson Hyperlegible",sans-serif;padding:10px 18px;border-radius:8px;cursor:pointer}
 .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
+.btn.sm{font-size:13.5px;padding:6px 12px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
 .timer{font:600 14px "JetBrains Mono",monospace;color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums}
-
-.result{display:flex;flex-direction:column;gap:14px}
 .score-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
 .big{font:600 34px "JetBrains Mono",monospace;font-variant-numeric:tabular-nums}
-.pill{font:700 12.5px "Atkinson Hyperlegible",sans-serif;padding:4px 10px;border-radius:999px}
-.pill.good{background:var(--good-soft);color:var(--good)} .pill.part{background:var(--part-soft);color:var(--part)} .pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill{font:700 12.5px "Atkinson Hyperlegible",sans-serif;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.pill.good{background:var(--good-soft);color:var(--good)} .pill.part{background:var(--part-soft);color:var(--part)} .pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.info{background:var(--accent-soft);color:var(--accent)}
 table{width:100%;border-collapse:collapse;font-size:14px}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
 td.st{white-space:nowrap;font-weight:700}
 .st.good{color:var(--good)} .st.part{color:var(--part)} .st.bad{color:var(--bad)}
-.why{display:flex;flex-direction:column;gap:8px;font-size:14.5px}
-.why li{margin-bottom:6px}
-.why ul{margin:0;padding-left:20px}
 .tablewrap{overflow-x:auto}
-
-/* dashboard */
+.coach{background:var(--accent-soft);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.coach ul,.why ul{margin:0;padding-left:20px}
+.coach li,.why li{margin-bottom:6px}
+.ask{border:0;background:transparent;color:var(--accent);font:700 12.5px "Atkinson Hyperlegible",sans-serif;cursor:pointer;padding:0;text-decoration:underline}
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:4px}
 .kpi .v{font:600 26px "JetBrains Mono",monospace;font-variant-numeric:tabular-nums}
 .kpi .l{font-size:13px;color:var(--muted)}
-.bar{height:8px;background:var(--surface-2);border-radius:4px;overflow:hidden;min-width:80px}
+.bar{height:8px;background:var(--surface-2);border-radius:4px;overflow:hidden;min-width:60px}
 .bar i{display:block;height:100%;background:var(--accent);border-radius:4px}
 .bar i.good{background:var(--good)} .bar i.part{background:var(--part)} .bar i.bad{background:var(--bad)}
 .num{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums}
-.gaps{display:flex;flex-direction:column;gap:10px}
-.gap{display:grid;grid-template-columns:200px 1fr 60px;gap:12px;align-items:center;font-size:14px}
-
-/* career */
+.gap{display:grid;grid-template-columns:190px 1fr 50px;gap:12px;align-items:center;font-size:14px}
 .ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .rung{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px;font-size:14px}
 .rung.on{border:2px solid var(--accent);background:var(--accent-soft)}
-.rung h3{font-size:15px}
-.rung .fee{font-family:"JetBrains Mono",monospace;font-size:13px}
 .q{display:flex;flex-direction:column;gap:8px;padding:14px 0;border-bottom:1px solid var(--line)}
 .opts{display:flex;flex-direction:column;gap:6px}
-.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--surface)}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--surface);color:var(--ink);font:inherit;text-align:left}
 .opt.right{border-color:var(--good);background:var(--good-soft)}
 .opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
 .expl{font-size:13.5px;color:var(--muted)}
-
+.hero-num{font:600 44px "JetBrains Mono",monospace;font-variant-numeric:tabular-nums;line-height:1}
+.letter{font:400 14px/1.6 "JetBrains Mono",monospace;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px;white-space:pre-wrap}
+.item{border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.yes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.yes .card{display:flex;flex-direction:column;gap:6px;padding:16px}
+svg text{font-family:"JetBrains Mono",monospace}
 @media (max-width:900px){
-  .grid{grid-template-columns:1fr}
+  .grid,.grid2{grid-template-columns:1fr}
   .kpis{grid-template-columns:repeat(2,1fr)}
-  .ladder{grid-template-columns:1fr 1fr}
-  .gap{grid-template-columns:1fr 1fr 50px}
+  .ladder,.yes{grid-template-columns:1fr 1fr}
 }
 @media (max-width:520px){
-  .row.px{grid-template-columns:24px minmax(0,1fr) 70px 46px 28px}
-  .colh{grid-template-columns:24px minmax(0,1fr) 70px 46px 28px}
-  .ladder{grid-template-columns:1fr}
+  .row.px,.colh{grid-template-columns:24px minmax(0,1fr) 64px 44px 28px}
+  .ladder,.yes{grid-template-columns:1fr}
   .chart dl{grid-template-columns:1fr}
-  .gap{grid-template-columns:1fr 60px}
+  .gap{grid-template-columns:1fr 50px}
   .gap .bar{grid-column:1 / -1}
 }
 </style>
@@ -142,248 +141,496 @@ td.st{white-space:nowrap;font-weight:700}
 
 <div class="wrap">
   <header class="top">
-    <div class="brand"><div class="mark">CR</div><div><h1>CodeRamp</h1><p class="small muted">Practice floor for new medical coders · proof of concept</p></div></div>
+    <div class="brand"><div class="mark">CR</div><div><h1>CodeRamp</h1><p class="small muted">From first chart to certified coder · proof of concept</p></div></div>
     <div class="tabs" role="tablist" aria-label="Sections">
-      <button class="tab" role="tab" id="t-practice" aria-selected="true" data-view="practice">Practice</button>
-      <button class="tab" role="tab" id="t-dash" aria-selected="false" data-view="dash">Trainer dashboard</button>
-      <button class="tab" role="tab" id="t-career" aria-selected="false" data-view="career">Career &amp; exam prep</button>
+      <button class="tab" role="tab" aria-selected="true" data-view="practice">Practice</button>
+      <button class="tab" role="tab" aria-selected="false" data-view="hire">Hiring test</button>
+      <button class="tab" role="tab" aria-selected="false" data-view="fund">Exam fund</button>
+      <button class="tab" role="tab" aria-selected="false" data-view="career">Career &amp; CEUs</button>
+      <button class="tab" role="tab" aria-selected="false" data-view="team">Trainer &amp; HR</button>
+      <button class="tab" role="tab" aria-selected="false" data-view="roi">Buyer ROI</button>
     </div>
   </header>
-  <p class="notice"><b>All charts are synthetic.</b> They are made-up encounters written for training, with no real patient data. Code descriptions are paraphrased; use your current ICD-10-CM, CPT and HCPCS books as the authority. Code sets are FY2026 ICD-10-CM and 2026 CPT/HCPCS conventions.</p>
+  <p class="notice"><b>All charts are synthetic</b>: made-up encounters with no real patient data. Code descriptions are paraphrased; your current ICD-10-CM, CPT and HCPCS books are the authority. Data in this demo stays in this browser.</p>
 
   <!-- PRACTICE -->
-  <section id="v-practice" class="view" aria-labelledby="t-practice">
+  <section class="view" id="v-practice">
     <div class="cases" id="cases" aria-label="Practice charts"></div>
     <div style="height:14px"></div>
-    <div class="grid">
-      <article class="card chart" id="chart"></article>
-      <div class="card form">
-        <div class="block-h"><h3>Diagnoses <span class="muted small">ICD-10-CM, primary first</span></h3><button class="add" type="button" id="add-dx">+ Add diagnosis</button></div>
-        <div class="rows" id="dx-rows"></div>
-        <div class="block-h"><h3>Procedures &amp; services <span class="muted small">CPT / HCPCS</span></h3><button class="add" type="button" id="add-px">+ Add code</button></div>
-        <div class="colh" aria-hidden="true"><span></span><span>Code</span><span>Modifiers</span><span>Units</span><span></span></div>
-        <div class="rows" id="px-rows"></div>
-        <div class="actions">
-          <button class="btn" type="button" id="submit">Check my coding</button>
-          <button class="btn ghost" type="button" id="reset">Clear</button>
-          <span class="timer" id="timer" aria-live="off">00:00</span>
-        </div>
-      </div>
-    </div>
+    <div id="practice-coder"></div>
     <div style="height:20px"></div>
-    <div class="card result" id="result" hidden></div>
+    <div class="card stack" id="result" hidden></div>
   </section>
 
-  <!-- DASHBOARD -->
-  <section id="v-dash" class="view" aria-labelledby="t-dash" hidden>
-    <div class="kpis" id="kpis"></div>
-    <div style="height:20px"></div>
-    <div class="grid">
-      <div class="card">
-        <h2>Batch progress toward the 95% standard</h2>
-        <p class="small muted" style="margin:4px 0 12px">Example batch, week 6 of onboarding (sample data) · your own results are the "You" row.</p>
-        <div class="tablewrap"><table><thead><tr><th>Trainee</th><th>Accuracy</th><th></th><th>Charts/hr</th><th>Status</th></tr></thead><tbody id="cohort"></tbody></table></div>
+  <!-- HIRING TEST -->
+  <section class="view stack" id="v-hire" hidden>
+    <div class="card stack">
+      <h2>Pre-hire skills test</h2>
+      <p class="muted" style="max-width:72ch">Screen candidates before you hire. Three charts, 15 minutes, no hints. The report goes to the Trainer &amp; HR tab with a recommendation.</p>
+      <div class="grid2" id="hire-start">
+        <label class="f" for="cand">Candidate name<input id="cand" placeholder="e.g. Priya S."></label>
+        <div class="actions" style="align-self:end"><button class="btn" type="button" id="hire-go">Start 15-minute test</button></div>
       </div>
-      <div class="card">
-        <h2>Where your points were lost</h2>
-        <p class="small muted" style="margin:4px 0 12px">From the charts you've checked in this browser. Coach on the biggest bar first.</p>
-        <div class="gaps" id="gaps"></div>
+    </div>
+    <div id="hire-run" hidden></div>
+    <div class="card stack" id="hire-report" hidden></div>
+  </section>
+
+  <!-- EXAM FUND -->
+  <section class="view stack" id="v-fund" hidden>
+    <div class="grid2">
+      <div class="card stack">
+        <h2>Save for your certification exam</h2>
+        <p class="small muted">Set aside a little from each paycheck. Your employer can match it. The fund pays the exam fee directly when you're ready.</p>
+        <label class="f" for="f-goal">Exam<select id="f-goal">
+          <option value="425">CPC (AAPC), 1 attempt · $425</option>
+          <option value="499" selected>CPC (AAPC), 2 attempts · $499</option>
+          <option value="299">CCA (AHIMA), non-member · $299</option>
+          <option value="199">CCA (AHIMA), member · $199</option>
+          <option value="425">CRC risk adjustment (AAPC) · $425</option>
+          <option value="custom">Other amount</option>
+        </select></label>
+        <label class="f" for="f-custom" id="f-custom-wrap" hidden>Exam cost ($)<input id="f-custom" type="number" min="0" value="400"></label>
+        <label class="chk"><input type="checkbox" id="f-member"> Add one year of AAPC membership (about $200; confirm the current rate)</label>
+        <div class="grid2">
+          <label class="f" for="f-month">I'll set aside each month ($)<input id="f-month" type="number" min="1" value="30"></label>
+          <label class="f" for="f-saved">Already saved ($)<input id="f-saved" type="number" min="0" value="0"></label>
+        </div>
+        <label class="f" for="f-match">Employer match<select id="f-match">
+          <option value="0">No match</option><option value="0.5" selected>50% match</option><option value="1">100% match</option>
+        </select></label>
       </div>
+      <div class="card stack" id="fund-out"></div>
+    </div>
+    <div class="card stack">
+      <h2>Ask HR to set up the payroll deduction</h2>
+      <p class="small muted">Deductions need your written consent. You can stop them any time; unused money is returned to you.</p>
+      <div class="grid2">
+        <label class="f" for="e-name">Your name<input id="e-name" placeholder="Full name"></label>
+        <label class="f" for="e-id">Employee ID<input id="e-id" placeholder="e.g. 10482"></label>
+        <label class="f" for="e-hr">HR email<input id="e-hr" type="email" placeholder="hr@yourcompany.com"></label>
+        <label class="f" for="e-start">Start month<input id="e-start" type="month"></label>
+      </div>
+      <label class="chk"><input type="checkbox" id="e-consent"> I voluntarily authorize my employer to deduct the amount above from my pay each month for my certification exam fund. I understand I can revoke this in writing at any time, deductions stop within one pay cycle, any unused balance is refunded to me, and no deduction may reduce my pay below minimum wage.</label>
+      <div class="actions"><button class="btn" type="button" id="e-send" disabled>Send request to HR</button><span class="small muted" id="e-status"></span></div>
+      <div id="e-letter"></div>
     </div>
   </section>
 
   <!-- CAREER -->
-  <section id="v-career" class="view" aria-labelledby="t-career" hidden>
+  <section class="view stack" id="v-career" hidden>
     <h2>Keep using CodeRamp after onboarding</h2>
-    <p class="muted" style="margin:6px 0 16px;max-width:70ch">The same practice floor becomes exam prep for each credential. Fees are per attempt (2026). Pay figures are from the AAPC salary survey.</p>
     <div class="ladder">
-      <div class="rung on"><h3>Trainee</h3><span>CodeRamp practice charts</span><span class="muted">~12 charts/day · 80% accuracy allowed</span></div>
-      <div class="rung"><h3>CCA or CPC-A</h3><span class="fee">CCA $199–299 (AHIMA)</span><span class="fee">CPC $425 (AAPC)</span><span class="muted">CPC-A pay ~$42–48k</span></div>
-      <div class="rung"><h3>CPC, apprentice removed</h3><span>2 yrs experience or the 600-case practicum route</span><span class="muted">~$67k average · 95% accuracy</span></div>
-      <div class="rung"><h3>Specialty &amp; audit</h3><span class="fee">CRC · CIC · COC · CPMA $425 each</span><span class="muted">2 credentials $71k avg · 3+ $81k avg</span></div>
+      <div class="rung on"><h3>Trainee</h3><span>Practice charts</span><span class="muted">~12 charts/day · 80% accuracy allowed</span></div>
+      <div class="rung"><h3>CCA or CPC-A</h3><span class="mono">CCA $199–299 · CPC $425</span><span class="muted">CPC-A pay ~$42–48k</span></div>
+      <div class="rung"><h3>CPC, apprentice removed</h3><span>2 yrs or the 600-case practicum</span><span class="muted">~$67k average · 95% accuracy</span></div>
+      <div class="rung"><h3>Specialty &amp; audit</h3><span class="mono">CRC · CIC · COC · CPMA $425</span><span class="muted">3+ credentials ~$81k average</span></div>
     </div>
-    <div style="height:20px"></div>
+    <div class="grid2">
+      <div class="card stack">
+        <h2>Keep your CPC active</h2>
+        <p class="small muted">AAPC requires 36 CEUs every two years (at least 18 AAPC-approved) plus current membership.</p>
+        <div class="grid2">
+          <label class="f" for="ceu-have">CEUs earned this cycle<input id="ceu-have" type="number" min="0" value="12"></label>
+          <label class="f" for="ceu-end">Cycle ends<input id="ceu-end" type="date"></label>
+        </div>
+        <div id="ceu-out"></div>
+      </div>
+      <div class="card stack">
+        <h2>Your portable record</h2>
+        <p class="small muted">Your case log and accuracy history belong to you. Use them for apprentice removal or job applications.</p>
+        <div id="record"></div>
+        <div class="actions"><button class="btn ghost sm" type="button" id="export">Download my record (CSV)</button></div>
+      </div>
+    </div>
     <div class="card">
-      <div class="block-h"><h2>Mock exam: coding guidelines (9 questions)</h2><span class="pill part" id="quiz-score">0 / 9</span></div>
-      <p class="small muted" style="margin-top:4px">CCA- and CPC-style knowledge checks. Pick an answer to see the explanation.</p>
+      <div class="block-h"><h2>Mock exam: coding guidelines</h2><span class="pill part" id="quiz-score">0 / 9</span></div>
       <div id="quiz"></div>
+    </div>
+  </section>
+
+  <!-- TRAINER & HR -->
+  <section class="view stack" id="v-team" hidden>
+    <div class="kpis" id="kpis"></div>
+    <div class="grid2">
+      <div class="card stack">
+        <h2>Batch progress and retention signals</h2>
+        <p class="small muted">Example batch, week 6 (sample data). Your own results are the "You" row.</p>
+        <div class="tablewrap"><table><thead><tr><th>Trainee</th><th>Accuracy</th><th>Charts/hr</th><th>Signal</th></tr></thead><tbody id="cohort"></tbody></table></div>
+      </div>
+      <div class="card stack">
+        <h2>Where points were lost</h2>
+        <div id="gaps"></div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card stack"><h2>Trainee questions</h2><p class="small muted">Questions raised on scored codes. Target reply: 1 business day.</p><div id="qs"></div></div>
+      <div class="card stack"><h2>Payroll deduction requests</h2><div id="deds"></div></div>
+    </div>
+    <div class="card stack"><h2>Hiring test results</h2><div id="hires"></div></div>
+  </section>
+
+  <!-- ROI -->
+  <section class="view stack" id="v-roi" hidden>
+    <div class="grid2">
+      <div class="card stack">
+        <h2>What CodeRamp is worth to your team</h2>
+        <div class="grid2">
+          <label class="f" for="r-team">Coders on the team<input id="r-team" type="number" value="100"></label>
+          <label class="f" for="r-turn">Annual turnover (%)<input id="r-turn" type="number" value="25"></label>
+          <label class="f" for="r-cost">Replacement cost per coder ($)<input id="r-cost" type="number" value="15000"></label>
+          <label class="f" for="r-salary">Average coder salary ($/yr)<input id="r-salary" type="number" value="51140"></label>
+          <label class="f" for="r-months">Months each hire uses a seat<input id="r-months" type="number" value="4"></label>
+          <label class="f" for="r-price">Seat price ($/month)<input id="r-price" type="number" value="59"></label>
+          <label class="f" for="r-faster">Ramp shortened by (months)<input id="r-faster" type="number" value="1" step="0.5"></label>
+          <label class="f" for="r-kept">Departures avoided per year<input id="r-kept" type="number" value="2"></label>
+        </div>
+        <p class="small muted">Defaults: BLS median pay; replacement cost from industry estimates of $15,000–22,000. Change any number to your own.</p>
+      </div>
+      <div class="card stack" id="roi-out"></div>
+    </div>
+    <h2>Why it's easy to say yes</h2>
+    <div class="yes">
+      <div class="card"><h3>No patient data</h3><p class="small muted">Synthetic charts only: no PHI, no HIPAA business associate agreement, no security review delay.</p></div>
+      <div class="card"><h3>No integration</h3><p class="small muted">Runs in a browser. Nothing to install and nothing touches your EHR or billing system.</p></div>
+      <div class="card"><h3>Free pilot</h3><p class="small muted">One batch of 10–20 trainees for 8 weeks, measured against your last batch.</p></div>
+      <div class="card"><h3>Hire better</h3><p class="small muted">The 15-minute skills test screens candidates before you spend on onboarding.</p></div>
+      <div class="card"><h3>Retention built in</h3><p class="small muted">Employee-funded exam fund with an optional match: a career path for the cost of a small match.</p></div>
+      <div class="card"><h3>Disputes answered</h3><p class="small muted">Trainees can question any score and a named trainer replies, so wrong keys get fixed fast.</p></div>
     </div>
   </section>
 </div>
 
 <script>
-/* ---------- synthetic case bank ---------- */
+/* ===== synthetic case bank ===== */
 const CASES=[
- {id:"c1",title:"Sore throat & congestion",level:"Easy",setting:"Office visit, established patient",
+ {id:"c1",title:"Sore throat & congestion",level:"Easy",setting:"Office visit, established patient",newPt:false,mdm:"low",
   note:{"Patient":"34-year-old, established","Complaint":"Nasal congestion, sore throat and mild cough for 3 days. No fever.","Exam":"Afebrile. Mild pharyngeal redness, no exudate. Lungs clear.","Assessment":"Acute upper respiratory infection.","Plan":"Fluids, rest, over-the-counter decongestant. Return if fever or worsening.","MDM":"Low: one acute uncomplicated illness; over-the-counter drug management."},
   dx:["J06.9"],dxOpt:[],px:[{code:"99213",mods:[],units:1}],
-  why:["<b>J06.9</b> acute upper respiratory infection, unspecified: matches the assessment. Symptoms (congestion, cough, sore throat) are not coded separately because they are part of the confirmed diagnosis.","<b>99213</b> established patient office visit, low MDM: one acute uncomplicated illness plus over-the-counter drug management meets 'low' for two of the three MDM elements."],
+  coach:{"J06.9":"The assessment names the condition: acute upper respiratory infection. Code the diagnosis, not the cough or congestion."},
+  why:["<b>J06.9</b> acute upper respiratory infection, unspecified. The symptoms are part of the confirmed diagnosis and aren't coded separately.","<b>99213</b> established patient, low MDM: an acute uncomplicated illness plus over-the-counter drug management."],
   tags:{dx:"Diagnosis selection",em:"E/M level"}},
- {id:"c2",title:"Child with sore throat, rapid strep",level:"Easy",setting:"Office visit, established patient",
+ {id:"c2",title:"Child with sore throat, rapid strep",level:"Easy",setting:"Office visit, established patient",newPt:false,mdm:"low",
   note:{"Patient":"9-year-old, established; history from parent","Complaint":"Sore throat and fever of 101.8°F since yesterday.","Tests":"Rapid strep antigen test done in office: POSITIVE.","Assessment":"Streptococcal pharyngitis.","Plan":"Amoxicillin prescribed for 10 days. School note given.","MDM":"Low: acute uncomplicated illness; prescription drug management."},
   dx:["J02.0"],dxOpt:[],px:[{code:"99213",mods:[],units:1},{code:"87880",mods:[],units:1}],
-  why:["<b>J02.0</b> streptococcal pharyngitis: the positive test confirms the organism, so the specific code is used instead of J02.9.","<b>99213</b>: MDM documented as low.","<b>87880</b> rapid strep antigen by immunoassay with direct optical (visual) observation: billed separately because the test was performed in the office. Medicare and some payers want modifier QW for CLIA-waived kits, so check payer rules."],
+  coach:{"J02.0":"A positive strep test confirms the organism, so use the specific streptococcal code J02.0, not unspecified pharyngitis (J02.9).","87880":"The test was performed in the office, so it's billed on its own: rapid strep antigen by immunoassay with visual reading."},
+  why:["<b>J02.0</b> streptococcal pharyngitis: the positive test confirms the organism.","<b>99213</b>: MDM documented as low.","<b>87880</b> rapid strep antigen, performed in office. Some payers want modifier QW for CLIA-waived kits."],
   tags:{dx:"Diagnosis specificity",em:"E/M level",px:"Lab test coding"}},
- {id:"c3",title:"Diabetes & blood pressure follow-up",level:"Medium",setting:"Office visit, established patient",
+ {id:"c3",title:"Diabetes & blood pressure follow-up",level:"Medium",setting:"Office visit, established patient",newPt:false,mdm:"moderate",
   note:{"Patient":"58-year-old, established","Reason":"Follow-up of type 2 diabetes and hypertension.","Medications":"Metformin 1000 mg twice daily; lisinopril 20 mg daily.","Tests":"Point-of-care HbA1c in office: 6.9%.","Exam":"BP 128/78. Feet: normal sensation, no lesions.","Assessment":"Type 2 diabetes without complications, well controlled on metformin. Essential hypertension, controlled.","Plan":"Continue both medications; refills sent. Recheck in 3 months.","MDM":"Moderate: two stable chronic illnesses; prescription drug management."},
   dx:["E11.9","I10","Z79.84"],dxOpt:[],px:[{code:"99214",mods:[],units:1},{code:"83036",mods:[],units:1}],
-  why:["<b>E11.9</b> type 2 diabetes without complications, sequenced first as the main reason for the visit.","<b>I10</b> essential (primary) hypertension.","<b>Z79.84</b> long-term (current) use of oral hypoglycemic drugs: required with E11 when the patient is on oral diabetes medication.","<b>99214</b>: two stable chronic illnesses (moderate problems) plus prescription drug management (moderate risk).","<b>83036</b> HbA1c, performed in the office. Add QW where the payer requires it for waived tests."],
+  coach:{"Z79.84":"When a type 2 diabetic takes oral diabetes medication (metformin), add Z79.84, long-term use of oral hypoglycemic drugs.","I10":"Hypertension was also managed at this visit, so it's coded too: I10.","E11.9":"The diabetes has no documented complications, so E11.9, listed first as the main reason for the visit.","83036":"The HbA1c was done in the office, so bill it: 83036."},
+  why:["<b>E11.9</b> type 2 diabetes without complications, first as the main reason for the visit.","<b>I10</b> essential hypertension.","<b>Z79.84</b> long-term use of oral hypoglycemic drugs, required with E11 when on oral medication.","<b>99214</b>: two stable chronic illnesses plus prescription drug management = moderate MDM.","<b>83036</b> HbA1c, in office."],
   tags:{dx:"Additional / Z codes",seq:"Sequencing",em:"E/M level",px:"Lab test coding"}},
- {id:"c4",title:"Kitchen knife laceration, hand",level:"Medium",setting:"Office, procedure-only visit",
+ {id:"c4",title:"Kitchen knife laceration, hand",level:"Medium",setting:"Office, procedure-only visit",newPt:false,mdm:"none",
   note:{"Patient":"27-year-old, established","History":"Cut the back of the right hand on a kitchen knife while cooking at home, 1 hour ago.","Exam":"3.0 cm clean laceration, dorsum of right hand. No tendon involvement, no foreign body.","Procedure":"Irrigated; simple single-layer closure with 5 sutures.","Assessment":"Laceration of right hand.","Note":"Visit was for the repair only; no separate problem evaluated."},
   dx:["S61.411A","W26.0XXA"],dxOpt:["Y92.010","Y93.G3"],px:[{code:"12002",mods:[],units:1}],
-  why:["<b>S61.411A</b> laceration without foreign body of right hand, initial encounter: 7th character A because this is active treatment.","<b>W26.0XXA</b> contact with knife, initial encounter: the external cause explains how it happened. The X placeholders hold the 7th character in position 7. Place (Y92.010) and activity (Y93.G3) codes are optional and not marked wrong here.","<b>12002</b> simple repair, 2.6 to 7.5 cm, of sites that include the hands: a single-layer closure is a simple repair.","<b>No E/M code:</b> the decision to repair is included in the procedure, and no separate problem was evaluated."],
+  coach:{"S61.411A":"Right hand, no foreign body, active treatment = S61.411A. The 7th character A means initial encounter.","W26.0XXA":"Add the external cause: contact with a knife, W26.0XXA. The XX placeholders push the A into the 7th position.","12002":"A 3.0 cm simple closure on the hand falls in the 2.6–7.5 cm range: 12002, not 12001."},
+  why:["<b>S61.411A</b> laceration without foreign body of right hand, initial encounter.","<b>W26.0XXA</b> contact with knife, initial encounter. Place and activity codes are optional here.","<b>12002</b> simple repair, 2.6–7.5 cm, sites including hands.","<b>No E/M:</b> the decision to repair is included in the procedure."],
   tags:{dx:"Injury & 7th character",ext:"External cause",px:"Procedure selection",em:"E/M with procedures"}},
- {id:"c5",title:"Rolled ankle playing basketball",level:"Medium",setting:"Office visit, NEW patient",
+ {id:"c5",title:"Rolled ankle playing basketball",level:"Medium",setting:"Office visit, NEW patient",newPt:true,mdm:"low",
   note:{"Patient":"22-year-old, new to the practice","History":"Rolled the right ankle playing basketball yesterday. Swelling, can bear weight with pain.","Imaging":"Right ankle X-ray, 3 views, done and read in office: no fracture.","Exam":"Lateral ankle swelling and tenderness; ligaments intact to stress testing.","Assessment":"Sprain of right ankle.","Plan":"Rest, ice, compression, elevation; ankle brace; over-the-counter ibuprofen.","MDM":"Low: acute uncomplicated injury; over-the-counter drug management."},
   dx:["S93.401A"],dxOpt:["Y93.67","X50.0XXA"],px:[{code:"99203",mods:[],units:1},{code:"73610",mods:[],units:1}],
-  why:["<b>S93.401A</b> sprain of unspecified ligament of right ankle, initial encounter: the provider did not name the ligament, so the unspecified-ligament code is correct.","<b>99203</b>: new patient office visit with low MDM. Watch the new vs established category.","<b>73610</b> ankle X-ray, complete (minimum 3 views). The provider's own reading of an X-ray they bill is not counted again as data in the MDM.","Activity code Y93.67 (basketball) is optional."],
+  coach:{"S93.401A":"The ligament isn't named, so use sprain of unspecified ligament of right ankle, initial encounter: S93.401A.","73610":"Three views of the ankle is a complete study: 73610 (73600 is two views)."},
+  why:["<b>S93.401A</b> sprain of unspecified ligament of right ankle, initial encounter.","<b>99203</b>: new patient, low MDM.","<b>73610</b> ankle X-ray, minimum 3 views.","Activity code Y93.67 (basketball) is optional."],
   tags:{dx:"Injury & 7th character",em:"New vs established",px:"Radiology coding"}},
- {id:"c6",title:"Low back pain, injection given",level:"Hard",setting:"Office visit, established patient",
+ {id:"c6",title:"Low back pain, injection given",level:"Hard",setting:"Office visit, established patient",newPt:false,mdm:"low",
   note:{"Patient":"41-year-old, established","History":"Low back pain for 2 days after lifting boxes. No leg pain, numbness or bladder symptoms.","Exam":"Lumbar paraspinal tenderness; normal neurological exam.","Treatment in office":"Ketorolac 30 mg given intramuscularly, right gluteal.","Assessment":"Acute low back pain.","Plan":"Cyclobenzaprine prescribed; heat; activity as tolerated.","MDM":"Low: acute uncomplicated problem; prescription drug management."},
   dx:["M54.50"],dxOpt:[],px:[{code:"99213",mods:["25"],units:1},{code:"96372",mods:[],units:1},{code:"J1885",mods:[],units:2}],
-  why:["<b>M54.50</b> low back pain, unspecified: M54.5 is no longer a billable code; it was expanded to M54.50 / M54.51 / M54.59.","<b>99213-25</b>: the visit was a significant, separately identifiable evaluation on the same day as the injection, so modifier 25 goes on the E/M.","<b>96372</b> therapeutic intramuscular injection: the administration.","<b>J1885 × 2</b> ketorolac, per 15 mg: 30 mg given = 2 units. Units errors are among the most common billing mistakes."],
+  unitNote:"Ketorolac J1885 is billed per 15 mg. 30 mg ÷ 15 mg = 2 units.",
+  coach:{"M54.50":"M54.5 is no longer billable. It was split in 2021: M54.50 is low back pain, unspecified.","96372":"The injection itself has an administration code: 96372 for a therapeutic intramuscular injection.","J1885":"Bill the drug as well as the administration: J1885, ketorolac per 15 mg."},
+  why:["<b>M54.50</b> low back pain, unspecified.","<b>99213-25</b>: a separately identifiable evaluation on the same day as the injection.","<b>96372</b> therapeutic IM injection.","<b>J1885 × 2</b> ketorolac per 15 mg; 30 mg = 2 units."],
   tags:{dx:"Code validity (updates)",mod:"Modifiers",units:"Units",em:"E/M level",px:"Drug & injection coding"}},
- {id:"c7",title:"Burning on urination",level:"Medium",setting:"Office visit, established patient",
+ {id:"c7",title:"Burning on urination",level:"Medium",setting:"Office visit, established patient",newPt:false,mdm:"low",
   note:{"Patient":"30-year-old woman, established","Complaint":"Burning with urination and frequency for 2 days. No fever or back pain.","Tests":"Urine dipstick in office, non-automated, no microscopy: positive leukocytes and nitrites.","Assessment":"Urinary tract infection.","Plan":"Nitrofurantoin for 5 days; fluids; return if fever.","MDM":"Low: acute uncomplicated illness; prescription drug management."},
   dx:["N39.0"],dxOpt:[],px:[{code:"99213",mods:[],units:1},{code:"81002",mods:[],units:1}],
-  why:["<b>N39.0</b> urinary tract infection, site not specified: the provider confirmed a UTI, so the symptoms (R30.0 dysuria, R35.0 frequency) are not coded.","<b>99213</b>: low MDM.","<b>81002</b> urinalysis by dipstick, non-automated, without microscopy. 81003 would be the automated version."],
+  coach:{"N39.0":"The provider confirmed a urinary tract infection without a site: N39.0.","81002":"A non-automated dipstick without microscopy is 81002. The automated version is 81003."},
+  why:["<b>N39.0</b> urinary tract infection, site not specified. The symptoms aren't coded.","<b>99213</b>: low MDM.","<b>81002</b> urinalysis, non-automated, without microscopy."],
   tags:{dx:"Symptoms vs definitive dx",em:"E/M level",px:"Lab test coding"}}
 ];
+const LEVEL={"low":"low","moderate":"moderate"};
 
-/* ---------- state ---------- */
-const LS="coderamp-v1";
-let store={attempts:{},current:"c1",quiz:{}};
-try{const s=JSON.parse(localStorage.getItem(LS)||"null");if(s&&s.attempts)store=Object.assign(store,s)}catch(e){}
+/* ===== state ===== */
+const LS="coderamp-v2";
+let store={attempts:{},current:"c1",quiz:{},questions:[],deductions:[],hires:[],log:[]};
+try{const s=JSON.parse(localStorage.getItem(LS)||"null");if(s)store=Object.assign(store,s)}catch(e){}
 function save(){try{localStorage.setItem(LS,JSON.stringify(store))}catch(e){}}
 const $=s=>document.querySelector(s);
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const norm=c=>String(c||"").toUpperCase().replace(/[\s.]/g,"");
+const money=n=>"$"+Math.round(n).toLocaleString("en-US");
+const pctClass=p=>p>=95?"good":p>=80?"part":"bad";
+const caseById=id=>CASES.find(c=>c.id===id);
 
-/* ---------- tabs ---------- */
+/* ===== tabs ===== */
+const renderers={team:renderTeam,career:renderCareer,fund:renderFund,roi:renderROI};
 document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
   document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===t));
   document.querySelectorAll(".view").forEach(v=>v.hidden=v.id!=="v-"+t.dataset.view);
-  if(t.dataset.view==="dash")renderDash();
+  (renderers[t.dataset.view]||(()=>{}))();
 }));
 
-/* ---------- practice ---------- */
-let startT=Date.now(),timerId=null;
-function pctClass(p){return p>=95?"good":p>=80?"part":"bad"}
-function renderChips(){
-  $("#cases").innerHTML=CASES.map(c=>{const a=store.attempts[c.id];return `<button class="case-chip" type="button" data-id="${c.id}" aria-current="${c.id===store.current}"><span class="dot ${a?pctClass(a.pct):""}"></span>${esc(c.title)} <span class="level">${c.level}</span></button>`}).join("");
-}
-$("#cases").addEventListener("click",e=>{const b=e.target.closest(".case-chip");if(!b)return;store.current=b.dataset.id;save();openCase()});
-function rowDx(v=""){return `<div class="row"><span class="n"></span><input class="code" aria-label="Diagnosis code" placeholder="e.g. J06.9" value="${esc(v)}" maxlength="9"><button class="x" type="button" aria-label="Remove">×</button></div>`}
-function rowPx(v="",m="",u="1"){return `<div class="row px"><span class="n"></span><input class="code" aria-label="CPT or HCPCS code" placeholder="e.g. 99213" value="${esc(v)}" maxlength="6"><input class="mod mono" aria-label="Modifiers" placeholder="25, 59" value="${esc(m)}"><input class="units mono" aria-label="Units" inputmode="numeric" value="${esc(u)}"><button class="x" type="button" aria-label="Remove">×</button></div>`}
-function renumber(){document.querySelectorAll("#dx-rows .row .n").forEach((n,i)=>n.textContent=i+1);document.querySelectorAll("#px-rows .row .n").forEach((n,i)=>n.textContent=i+1)}
-function clearForm(){$("#dx-rows").innerHTML=rowDx()+rowDx();$("#px-rows").innerHTML=rowPx();renumber()}
-$("#add-dx").addEventListener("click",()=>{$("#dx-rows").insertAdjacentHTML("beforeend",rowDx());renumber()});
-$("#add-px").addEventListener("click",()=>{$("#px-rows").insertAdjacentHTML("beforeend",rowPx());renumber()});
-document.addEventListener("click",e=>{const x=e.target.closest(".x");if(!x)return;const rows=x.closest(".rows");if(rows.children.length>1){x.closest(".row").remove();renumber()}else{x.closest(".row").querySelectorAll("input").forEach(i=>i.value=i.classList.contains("units")?"1":"")}});
-$("#reset").addEventListener("click",()=>{clearForm();$("#result").hidden=true;startT=Date.now()});
-function tick(){const s=Math.floor((Date.now()-startT)/1000);$("#timer").textContent=`${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`}
-function openCase(){
-  const c=CASES.find(x=>x.id===store.current)||CASES[0];
-  renderChips();
-  $("#chart").innerHTML=`<div class="chart-head"><div><h2>${esc(c.title)}</h2><p class="small muted">${esc(c.setting)}</p></div><span class="synth">SYNTHETIC CHART</span></div><dl>${Object.entries(c.note).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>`;
-  clearForm();$("#result").hidden=true;startT=Date.now();clearInterval(timerId);timerId=setInterval(tick,1000);tick();
+/* ===== reusable coder panel ===== */
+function rowDx(){return `<div class="row"><span class="n"></span><input class="code" aria-label="Diagnosis code" placeholder="e.g. J06.9" maxlength="9"><button class="x" type="button" aria-label="Remove">×</button></div>`}
+function rowPx(){return `<div class="row px"><span class="n"></span><input class="code" aria-label="CPT or HCPCS code" placeholder="e.g. 99213" maxlength="6"><input class="mod" aria-label="Modifiers" placeholder="25, 59"><input class="units" aria-label="Units" inputmode="numeric" value="1"><button class="x" type="button" aria-label="Remove">×</button></div>`}
+function mountCoder(root,c,{submitLabel="Check my coding",onSubmit}){
+  root.innerHTML=`<div class="grid"><article class="card chart"><div class="chart-head"><div><h2>${esc(c.title)}</h2><p class="small muted">${esc(c.setting)}</p></div><span class="synth">SYNTHETIC CHART</span></div><dl>${Object.entries(c.note).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl></article>
+  <div class="card form"><div class="block-h"><h3>Diagnoses <span class="muted small">ICD-10-CM, primary first</span></h3><button class="add" type="button" data-add="dx">+ Add diagnosis</button></div><div class="rows dx">${rowDx()+rowDx()}</div>
+  <div class="block-h"><h3>Procedures &amp; services <span class="muted small">CPT / HCPCS</span></h3><button class="add" type="button" data-add="px">+ Add code</button></div>
+  <div class="colh" aria-hidden="true"><span></span><span>Code</span><span>Modifiers</span><span>Units</span><span></span></div><div class="rows px">${rowPx()}</div>
+  <div class="actions"><button class="btn" type="button" data-go>${submitLabel}</button><span class="timer" data-timer>00:00</span></div></div></div>`;
+  const renum=()=>{root.querySelectorAll(".rows").forEach(r=>r.querySelectorAll(".n").forEach((n,i)=>n.textContent=i+1))};renum();
+  root.querySelector('[data-add="dx"]').onclick=()=>{root.querySelector(".rows.dx").insertAdjacentHTML("beforeend",rowDx());renum()};
+  root.querySelector('[data-add="px"]').onclick=()=>{root.querySelector(".rows.px").insertAdjacentHTML("beforeend",rowPx());renum()};
+  root.onclick=(e=>{const x=e.target.closest(".x");if(!x||!root.contains(x))return;const rows=x.closest(".rows");if(rows.children.length>1){x.closest(".row").remove();renum()}else x.closest(".row").querySelectorAll("input").forEach(i=>i.value=i.classList.contains("units")?"1":"")});
+  const t0=Date.now(),tEl=root.querySelector("[data-timer]");
+  const iv=setInterval(()=>{if(!document.body.contains(tEl)){clearInterval(iv);return}const s=Math.floor((Date.now()-t0)/1000);tEl.textContent=`${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`},1000);
+  root.querySelector("[data-go]").onclick=()=>{
+    const dx=[...root.querySelectorAll(".rows.dx input.code")].map(i=>norm(i.value)).filter(Boolean);
+    const px=[...root.querySelectorAll(".rows.px .row")].map(r=>({code:norm(r.querySelector(".code").value),mods:r.querySelector(".mod").value.toUpperCase().split(/[\s,;-]+/).filter(Boolean),units:parseInt(r.querySelector(".units").value,10)||1})).filter(p=>p.code);
+    onSubmit({dx,px},Math.max(1,Math.round((Date.now()-t0)/1000)));
+  };
 }
 
-/* ---------- scoring ---------- */
-function readForm(){
-  const dx=[...document.querySelectorAll("#dx-rows input.code")].map(i=>norm(i.value)).filter(Boolean);
-  const px=[...document.querySelectorAll("#px-rows .row")].map(r=>({code:norm(r.querySelector(".code").value),mods:r.querySelector(".mod").value.toUpperCase().split(/[\s,;-]+/).filter(Boolean),units:parseInt(r.querySelector(".units").value,10)||1})).filter(p=>p.code);
-  return {dx,px};
-}
+/* ===== scoring with personal coaching ===== */
 function score(c,ans){
-  const lines=[],lost={};let pts=0,max=0;
+  const lines=[],lost={},coach=[];let pts=0,max=0;
   const lose=(tag,n)=>{if(!tag)return;lost[tag]=(lost[tag]||0)+n};
   const exp=c.dx.map(norm),opt=c.dxOpt.map(norm);
-  const dxTag=code=>/^[VWXY]/.test(code)?c.tags.ext||c.tags.dx:/^Z/.test(code)?c.tags.dx:c.tags.dx;
+  const dxTag=code=>/^[VWXY]/.test(code)?(c.tags.ext||c.tags.dx):c.tags.dx;
   exp.forEach((e,i)=>{max++;const pretty=c.dx[i];
     if(ans.dx.includes(e)){pts++;lines.push(["good","Correct",pretty,"Diagnosis"])}
     else{const near=ans.dx.find(a=>a.slice(0,3)===e.slice(0,3)&&!exp.includes(a));
-      if(near){pts+=.5;lose(dxTag(e),.5);lines.push(["part","Close",`${pretty} (you: ${near})`,"Right category, wrong specificity or 7th character"])}
-      else{lose(dxTag(e),1);lines.push(["bad","Missing",pretty,"Diagnosis"])}}});
-  if(exp.length>1){max++;if(ans.dx[0]===exp[0]){pts++;lines.push(["good","Correct","Sequencing","Primary diagnosis listed first"])}else{lose(c.tags.seq||"Sequencing",1);lines.push(["bad","Wrong","Sequencing",`Primary should be ${c.dx[0]}`])}}
-  ans.dx.forEach(a=>{if(!exp.includes(a)&&!opt.includes(a)&&!exp.some(e=>e.slice(0,3)===a.slice(0,3))){pts-=.5;lose(c.tags.dx,.5);lines.push(["bad","Extra",a,"Not supported by the documentation (−0.5)"])}
-    else if(opt.includes(a))lines.push(["good","Optional",a,"Optional code, accepted"])});
-  c.px.forEach(e=>{max++;const hit=ans.px.find(p=>p.code===e.code);const tag=/^99/.test(e.code)?c.tags.em:c.tags.px;
+      if(near){pts+=.5;lose(dxTag(e),.5);lines.push(["part","Close",`${pretty} (you: ${near})`,"Right category, wrong detail"]);
+        if(near.length===e.length&&near.slice(0,-1)===e.slice(0,-1))coach.push(`You used <b>${esc(near)}</b>. Only the 7th character is off: <b>A</b> = initial encounter (active treatment), <b>D</b> = subsequent, <b>S</b> = sequela. This chart is active treatment.`);
+        else if(norm(near)==="M545")coach.push(`<b>M54.5</b> stopped being billable in October 2021. Payers reject it. Use the 5-character codes M54.50, M54.51 or M54.59.`);
+        else coach.push(`You were in the right category with <b>${esc(near)}</b>. ${c.coach[pretty]||"Check the 4th–6th characters against the documentation."}`)}
+      else{lose(dxTag(e),1);lines.push(["bad","Missing",pretty,"Diagnosis"]);if(c.coach[pretty])coach.push(c.coach[pretty])}}});
+  if(exp.length>1){max++;if(ans.dx[0]===exp[0]){pts++;lines.push(["good","Correct","Sequencing","Primary diagnosis first"])}else{lose(c.tags.seq||"Sequencing",1);lines.push(["bad","Wrong","Sequencing",`Primary should be ${c.dx[0]}`]);coach.push(`List the main reason for the visit first: <b>${c.dx[0]}</b>. Payers read the first diagnosis as the reason for the claim.`)}}
+  ans.dx.forEach(a=>{if(exp.includes(a))return;if(opt.includes(a)){lines.push(["good","Optional",a,"Optional code, accepted"]);return}
+    if(exp.some(e=>e.slice(0,3)===a.slice(0,3)))return;
+    pts-=.5;lose(c.tags.dx,.5);lines.push(["bad","Extra",a,"Not supported by the documentation (−0.5)"]);
+    if(/^R/.test(a))coach.push(`<b>${esc(a)}</b> is a symptom code. Once the provider confirms a diagnosis, symptoms that are part of it are not coded.`);
+    else coach.push(`<b>${esc(a)}</b> isn't documented in this chart. Code only what the provider states. Extra diagnoses can trigger denials or audits.`)});
+  c.px.forEach(e=>{max++;const hit=ans.px.find(p=>p.code===e.code);const isEM=/^99/.test(e.code);const tag=isEM?c.tags.em:c.tags.px;
     if(!hit){
-      const sib=/^99/.test(e.code)&&ans.px.find(p=>/^99/.test(p.code));
-      if(sib){pts+=.25;lose(c.tags.em,.75);lines.push(["part","Wrong level",`${e.code} (you: ${sib.code})`,"Check new vs established and the MDM level"])}
-      else{lose(tag,1);lines.push(["bad","Missing",e.code+(e.mods.length?"-"+e.mods.join("-"):""),e.units>1?`× ${e.units} units`:"Procedure / service"])}
+      const sib=isEM&&ans.px.find(p=>/^99/.test(p.code));
+      if(sib){pts+=.25;lose(c.tags.em,.75);lines.push(["part","Wrong level",`${e.code} (you: ${sib.code})`,"Check category and MDM"]);
+        if(c.newPt&&/^9921/.test(sib.code))coach.push(`This is a <b>new patient</b> (not seen in 3 years), so office visits are 99202–99205, not 9921x. Same MDM, different category.`);
+        else if(!c.newPt&&/^9920/.test(sib.code))coach.push(`This patient is <b>established</b>, so use 99212–99215, not the new-patient codes.`);
+        else{const up=+sib.code.slice(-1)>+e.code.slice(-1);coach.push(up?`You coded <b>${sib.code}</b>, higher than documented. The chart supports <b>${c.mdm}</b> MDM → ${e.code}. Overcoding is the top audit finding and can mean repayments.`:`You coded <b>${sib.code}</b>, lower than documented. The chart supports <b>${c.mdm}</b> MDM → ${e.code}. Undercoding leaves earned money unbilled.`)}}
+      else{lose(tag,1);lines.push(["bad","Missing",e.code+(e.mods.length?"-"+e.mods.join("-"):""),e.units>1?`× ${e.units} units`:"Procedure / service"]);if(c.coach[e.code])coach.push(c.coach[e.code])}
       return}
     let p=1,notes=[];
     const em=[...e.mods].sort().join(),gm=[...hit.mods].sort().join();
-    if(em!==gm){p-=.5;lose(c.tags.mod||"Modifiers",.5);notes.push(e.mods.length?`needs modifier ${e.mods.join(", ")}`:"no modifier needed")}
-    if(hit.units!==e.units){p-=.5;lose(c.tags.units||"Units",.5);notes.push(`units should be ${e.units}`)}
+    if(em!==gm){p-=.5;lose(c.tags.mod||"Modifiers",.5);
+      if(e.mods.includes("25")&&!hit.mods.includes("25")){notes.push("needs modifier 25");coach.push(`Add <b>modifier 25</b> to ${e.code}. Without it, the payer treats the visit as part of the injection and pays nothing for it. 25 says the evaluation was significant and separate.`)}
+      else if(!e.mods.length){notes.push("no modifier needed");coach.push(`<b>${e.code}</b> needs no modifier here. Unsupported modifiers (especially 25 and 59) are a common audit flag.`)}
+      else notes.push(`modifier should be ${e.mods.join(", ")}`)}
+    if(hit.units!==e.units){p-=.5;lose(c.tags.units||"Units",.5);notes.push(`units should be ${e.units}`);coach.push(c.unitNote||`Units for ${e.code} should be ${e.units}.`)}
     pts+=p;lines.push([p===1?"good":"part",p===1?"Correct":"Partly right",e.code+(e.mods.length?"-"+e.mods.join("-"):"")+(e.units>1?` × ${e.units}`:""),notes.join("; ")||"Procedure / service"])});
-  ans.px.forEach(a=>{if(!c.px.some(e=>e.code===a.code)&&!(/^99/.test(a.code)&&c.px.some(e=>/^99/.test(e.code)))){pts-=.5;lose(/^99/.test(a.code)?(c.tags.em||"E/M level"):c.tags.px||"Procedure selection",.5);lines.push(["bad","Extra",a.code,/^99/.test(a.code)?"E/M not separately billable here (−0.5)":"Not supported by the documentation (−0.5)"])}});
+  ans.px.forEach(a=>{if(c.px.some(e=>e.code===a.code))return;if(/^99/.test(a.code)&&c.px.some(e=>/^99/.test(e.code)))return;
+    pts-=.5;const isEM=/^99/.test(a.code);lose(isEM?(c.tags.em||"E/M level"):(c.tags.px||"Procedure selection"),.5);lines.push(["bad","Extra",a.code,"Not supported (−0.5)"]);
+    if(isEM)coach.push(`No E/M here. For a minor procedure, deciding to do it is included in the procedure code. Bill an E/M (with 25) only when a separate problem is evaluated.`);
+    else coach.push(`<b>${esc(a.code)}</b> isn't documented as performed. Bill only services in the note.`)});
   pts=Math.max(0,pts);
-  return {pct:Math.round(pts/max*100),pts,max,lines,lost};
-}
-$("#submit").addEventListener("click",()=>{
-  const c=CASES.find(x=>x.id===store.current);const ans=readForm();
-  if(!ans.dx.length&&!ans.px.length){$("#result").hidden=false;$("#result").innerHTML=`<p>Enter at least one code, then check.</p>`;return}
-  const r=score(c,ans);const secs=Math.max(1,Math.round((Date.now()-startT)/1000));
-  store.attempts[c.id]={pct:r.pct,secs,lost:r.lost,when:Date.now()};save();renderChips();
-  const cls=pctClass(r.pct),label=r.pct>=95?"Meets the 95% standard":r.pct>=80?"Trainee standard (80%+)":"Below trainee standard";
-  $("#result").hidden=false;
-  $("#result").innerHTML=`<div class="score-row"><span class="big">${r.pct}%</span><span class="pill ${cls}">${label}</span><span class="muted small">${r.pts.toFixed(2).replace(/\.00$/,"")} of ${r.max} points · ${Math.floor(secs/60)}m ${secs%60}s</span></div>
-  <div class="tablewrap"><table><thead><tr><th>Result</th><th>Code</th><th>Detail</th></tr></thead><tbody>${r.lines.map(l=>`<tr><td class="st ${l[0]}">${l[1]}</td><td class="mono">${esc(l[2])}</td><td>${esc(l[3])}</td></tr>`).join("")}</tbody></table></div>
-  <div class="why"><h3>Why these codes</h3><ul>${c.why.map(w=>`<li>${w}</li>`).join("")}</ul></div>
-  <div class="actions"><button class="btn" type="button" id="next">Next chart →</button></div>`;
-  $("#next").addEventListener("click",()=>{const i=CASES.findIndex(x=>x.id===c.id);store.current=CASES[(i+1)%CASES.length].id;save();openCase();window.scrollTo({top:0,behavior:"smooth"})});
-  $("#result").scrollIntoView({behavior:"smooth",block:"start"});
-});
-
-/* ---------- dashboard ---------- */
-const COHORT=[["Trainee A",96,5.1],["Trainee B",91,4.4],["Trainee C",88,3.9],["Trainee D",84,4.6],["Trainee E",79,3.2],["Trainee F",72,2.8]];
-function renderDash(){
-  const at=Object.values(store.attempts);const n=at.length;
-  const acc=n?Math.round(at.reduce((s,a)=>s+a.pct,0)/n):null;
-  const hrs=at.reduce((s,a)=>s+a.secs,0)/3600;const cph=n?(n/hrs):null;
-  const meets=at.filter(a=>a.pct>=95).length;
-  $("#kpis").innerHTML=[
-    [acc===null?"—":acc+"%","Your average accuracy (target 95%)"],
-    [n+" / "+CASES.length,"Practice charts completed"],
-    [cph===null?"—":cph.toFixed(1),"Your charts per hour"],
-    [meets,"Charts at 95% or better"]
-  ].map(k=>`<div class="kpi"><span class="v">${k[0]}</span><span class="l">${k[1]}</span></div>`).join("");
-  const rows=COHORT.map(r=>({name:r[0],acc:r[1],cph:r[2],you:false}));
-  if(n)rows.push({name:"You",acc,cph:+cph.toFixed(1),you:true});
-  rows.sort((a,b)=>b.acc-a.acc);
-  $("#cohort").innerHTML=rows.map(r=>{const c=pctClass(r.acc);const st=r.acc>=95?"Ready for live charts":r.acc>=80?"On track":"Needs coaching";
-    return `<tr${r.you?' style="font-weight:700"':""}><td>${r.name}</td><td class="num">${r.acc}%</td><td style="width:30%"><div class="bar"><i class="${c}" style="width:${r.acc}%"></i></div></td><td class="num">${r.cph}</td><td><span class="pill ${c}">${st}</span></td></tr>`}).join("")+(n?"":`<tr><td colspan="5" class="muted">Check a practice chart to add your own row.</td></tr>`);
-  const lost={};at.forEach(a=>Object.entries(a.lost||{}).forEach(([k,v])=>lost[k]=(lost[k]||0)+v));
-  const list=Object.entries(lost).sort((a,b)=>b[1]-a[1]);const top=list.length?list[0][1]:1;
-  $("#gaps").innerHTML=list.length?list.map(([k,v])=>`<div class="gap"><span>${esc(k)}</span><div class="bar"><i class="bad" style="width:${v/top*100}%"></i></div><span class="num">−${v}</span></div>`).join(""):`<p class="muted">No points lost yet. Check a few charts and the gaps will appear here by skill.</p>`;
+  return {pct:Math.round(pts/max*100),pts,max,lines,lost,coach};
 }
 
-/* ---------- quiz ---------- */
+/* ===== practice ===== */
+function renderChips(){$("#cases").innerHTML=CASES.map(c=>{const a=store.attempts[c.id];return `<button class="case-chip" type="button" data-id="${c.id}" aria-current="${c.id===store.current}"><span class="dot ${a?pctClass(a.pct):""}"></span>${esc(c.title)} <span class="level">${c.level}</span></button>`}).join("")}
+$("#cases").addEventListener("click",e=>{const b=e.target.closest(".case-chip");if(!b)return;store.current=b.dataset.id;save();openCase()});
+function allLost(){const lost={};Object.values(store.attempts).forEach(a=>Object.entries(a.lost||{}).forEach(([k,v])=>lost[k]=(lost[k]||0)+v));return lost}
+function recommend(excludeId){
+  const lost=Object.entries(allLost()).sort((a,b)=>b[1]-a[1]);
+  const pool=CASES.filter(c=>c.id!==excludeId);
+  for(const [tag] of lost){const hit=pool.filter(c=>Object.values(c.tags).includes(tag)).sort((a,b)=>(store.attempts[a.id]?.pct??-1)-(store.attempts[b.id]?.pct??-1));if(hit.length)return {c:hit[0],why:`targets your weakest skill: ${tag}`}}
+  const fresh=pool.find(c=>!store.attempts[c.id]);return {c:fresh||pool[0],why:fresh?"a chart you haven't tried":"keep your streak going"};
+}
+function openCase(){
+  const c=caseById(store.current)||CASES[0];renderChips();$("#result").hidden=true;
+  mountCoder($("#practice-coder"),c,{onSubmit:(ans,secs)=>{
+    if(!ans.dx.length&&!ans.px.length){$("#result").hidden=false;$("#result").innerHTML="<p>Enter at least one code, then check.</p>";return}
+    const r=score(c,ans);
+    store.attempts[c.id]={pct:r.pct,secs,lost:r.lost,when:Date.now()};
+    store.log.push({case:c.id,title:c.title,pct:r.pct,secs,when:new Date().toISOString().slice(0,10)});save();renderChips();
+    const cls=pctClass(r.pct),label=r.pct>=95?"Meets the 95% standard":r.pct>=80?"Trainee standard (80%+)":"Below trainee standard";
+    const rec=recommend(c.id);
+    $("#result").hidden=false;
+    $("#result").innerHTML=`<div class="score-row"><span class="big">${r.pct}%</span><span class="pill ${cls}">${label}</span><span class="muted small">${String(r.pts.toFixed(2)).replace(/\.00$/,"")} of ${r.max} points · ${Math.floor(secs/60)}m ${secs%60}s</span></div>
+    ${r.coach.length?`<div class="coach"><h3>Your coach on this chart</h3><ul>${r.coach.map(x=>`<li>${x}</li>`).join("")}</ul></div>`:`<div class="coach"><h3>Clean chart</h3><p>Every code, modifier and unit matched. Try a harder chart next.</p></div>`}
+    <div class="tablewrap"><table><thead><tr><th>Result</th><th>Code</th><th>Detail</th><th></th></tr></thead><tbody>${r.lines.map((l,i)=>`<tr><td class="st ${l[0]}">${l[1]}</td><td class="mono">${esc(l[2])}</td><td>${esc(l[3])}</td><td>${l[0]!=="good"?`<button class="ask" type="button" data-q="${i}">Question this</button>`:""}</td></tr>`).join("")}</tbody></table></div>
+    <div id="ask-box"></div>
+    <div class="why"><h3>Answer key</h3><ul>${c.why.map(w=>`<li>${w}</li>`).join("")}</ul></div>
+    <div class="actions"><button class="btn" type="button" id="next">Next: ${esc(rec.c.title)} →</button><span class="small muted">Recommended because it ${esc(rec.why)}.</span></div>`;
+    $("#result").querySelectorAll(".ask").forEach(b=>b.onclick=()=>{const l=r.lines[+b.dataset.q];
+      $("#ask-box").innerHTML=`<div class="item"><label class="f" for="q-text">Your question about ${esc(l[2])}<textarea id="q-text" placeholder="e.g. The note says 3 views, why not 73600?"></textarea></label><div class="actions"><button class="btn sm" type="button" id="q-send">Send to trainer</button></div></div>`;
+      $("#q-send").onclick=()=>{const t=$("#q-text").value.trim();if(!t)return;store.questions.unshift({id:Date.now(),case:c.title,code:l[2],text:t,reply:"",when:new Date().toLocaleDateString()});save();$("#ask-box").innerHTML=`<p class="pill info" style="display:inline-block">Sent. Your trainer sees it in the Trainer &amp; HR tab; target reply within 1 business day.</p>`}});
+    $("#next").onclick=()=>{store.current=rec.c.id;save();openCase();window.scrollTo({top:0,behavior:"smooth"})};
+    $("#result").scrollIntoView({behavior:"smooth",block:"start"});
+  }});
+}
+
+/* ===== hiring test ===== */
+const HIRE_SET=["c1","c3","c6"];let hireState=null;
+$("#hire-go").onclick=()=>{const name=$("#cand").value.trim()||"Candidate";hireState={name,i:0,results:[],start:Date.now()};$("#hire-report").hidden=true;$("#hire-run").hidden=false;runHire()};
+function runHire(){
+  const c=caseById(HIRE_SET[hireState.i]);const left=Math.max(0,900-Math.round((Date.now()-hireState.start)/1000));
+  $("#hire-run").innerHTML=`<p class="small muted" style="margin-bottom:10px">${esc(hireState.name)} · chart ${hireState.i+1} of ${HIRE_SET.length} · about ${Math.ceil(left/60)} minutes left</p><div id="hire-coder"></div>`;
+  mountCoder($("#hire-coder"),c,{submitLabel:hireState.i<HIRE_SET.length-1?"Submit and continue":"Submit test",onSubmit:(ans,secs)=>{
+    const r=score(c,ans);hireState.results.push({title:c.title,pct:r.pct,secs,lost:r.lost});hireState.i++;
+    const over=(Date.now()-hireState.start)/1000>900;
+    if(hireState.i<HIRE_SET.length&&!over)runHire();else finishHire(over)}});
+}
+function finishHire(over){
+  const rs=hireState.results;const avg=Math.round(rs.reduce((s,r)=>s+r.pct,0)/HIRE_SET.length);const mins=Math.round((Date.now()-hireState.start)/60000);
+  const lost={};rs.forEach(r=>Object.entries(r.lost).forEach(([k,v])=>lost[k]=(lost[k]||0)+v));const weak=Object.entries(lost).sort((a,b)=>b[1]-a[1]).slice(0,2).map(x=>x[0]);
+  const rec=avg>=80?["good","Hire-ready"]:avg>=60?["part","Trainable: hire with a coaching plan"]:["bad","Not yet"];
+  store.hires.unshift({name:hireState.name,avg,mins,rec:rec[1],cls:rec[0],weak,when:new Date().toLocaleDateString(),done:rs.length});save();
+  $("#hire-run").hidden=true;$("#hire-report").hidden=false;
+  $("#hire-report").innerHTML=`<h2>Skills report: ${esc(hireState.name)}</h2><div class="score-row"><span class="big">${avg}%</span><span class="pill ${rec[0]}">${rec[1]}</span><span class="small muted">${rs.length} of ${HIRE_SET.length} charts · ${mins} min${over?" · time ran out":""}</span></div>
+  <div class="tablewrap"><table><thead><tr><th>Chart</th><th>Accuracy</th><th>Time</th></tr></thead><tbody>${rs.map(r=>`<tr><td>${esc(r.title)}</td><td class="num">${r.pct}%</td><td class="num">${Math.floor(r.secs/60)}m ${r.secs%60}s</td></tr>`).join("")}</tbody></table></div>
+  <p>${weak.length?`Coach first on: <b>${weak.map(esc).join(", ")}</b>.`:"No weak areas found."} The report is saved in Trainer &amp; HR.</p>`;
+  hireState=null;
+}
+
+/* ===== exam fund ===== */
+const fundInputs=["#f-goal","#f-custom","#f-member","#f-month","#f-saved","#f-match"];
+fundInputs.forEach(s=>$(s).addEventListener("input",renderFund));
+function fundCalc(){
+  const g=$("#f-goal").value;$("#f-custom-wrap").hidden=g!=="custom";
+  const exam=g==="custom"?(+$("#f-custom").value||0):+g;const mem=$("#f-member").checked?200:0;const goal=exam+mem;
+  const m=Math.max(0,+$("#f-month").value||0),saved=Math.max(0,+$("#f-saved").value||0),match=+$("#f-match").value;
+  const per=m*(1+match);const need=Math.max(0,goal-saved);const months=per>0?Math.ceil(need/per):Infinity;
+  const label=$("#f-goal").selectedOptions[0].text.split(" ·")[0];
+  return {exam,mem,goal,m,saved,match,per,months,label};
+}
+function renderFund(){
+  const f=fundCalc();const out=$("#fund-out");
+  if(!isFinite(f.months)){out.innerHTML=`<h2>Set a monthly amount</h2><p class="muted">Enter how much you'd like to set aside each month.</p>`;return}
+  const d=new Date();d.setMonth(d.getMonth()+f.months);const when=d.toLocaleDateString("en-US",{month:"long",year:"numeric"});
+  const acc=Object.values(store.attempts);const avg=acc.length?Math.round(acc.reduce((s,a)=>s+a.pct,0)/acc.length):null;
+  // chart
+  const W=460,H=170,L=44,B=28,n=Math.max(1,f.months),bw=Math.min(28,(W-L-10)/n-4),top=Math.max(f.goal,f.saved+f.per*n);
+  const y=v=>H-B-(v/top)*(H-B-14);let bars="";
+  for(let i=1;i<=n;i++){const own=Math.min(f.saved+f.m*i,f.goal),tot=Math.min(f.saved+f.per*i,f.goal);const x=L+(i-1)*((W-L-10)/n)+2;
+    bars+=`<rect x="${x}" y="${y(tot)}" width="${bw}" height="${y(own)-y(tot)}" fill="var(--good)" opacity=".55"><title>Month ${i}: employer match</title></rect><rect x="${x}" y="${y(own)}" width="${bw}" height="${H-B-y(own)}" fill="var(--accent)"><title>Month ${i}: ${money(own)} from you</title></rect>`}
+  out.innerHTML=`<p class="small muted">${esc(f.label)}${f.mem?" + membership":""} · goal ${money(f.goal)}</p>
+  <p class="hero-num">${f.months} ${f.months===1?"month":"months"}</p>
+  <p>At <b>${money(f.m)}/month</b>${f.match?` plus a <b>${f.match*100}% employer match</b> (${money(f.m*f.match)})`:""}, you can book the exam by <b>${when}</b>.</p>
+  <svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Exam fund growth by month">
+   <line x1="${L}" x2="${W-6}" y1="${y(f.goal)}" y2="${y(f.goal)}" stroke="var(--part)" stroke-dasharray="4 4"/>
+   <text x="${L}" y="${y(f.goal)-5}" font-size="11" fill="var(--part)">goal ${money(f.goal)}</text>
+   ${bars}<line x1="${L}" x2="${W-6}" y1="${H-B}" y2="${H-B}" stroke="var(--line)"/>
+   <text x="${L}" y="${H-8}" font-size="11" fill="var(--muted)">month 1</text><text x="${W-6}" y="${H-8}" font-size="11" fill="var(--muted)" text-anchor="end">month ${n}</text></svg>
+  <p class="small muted"><span style="color:var(--accent)">■</span> from you · <span style="color:var(--good)">■</span> employer match</p>
+  <p class="small">${avg===null?"Tip: practise charts while you save. Aim to be at 95% accuracy by the time the fund is ready.":`Your practice accuracy is <b>${avg}%</b>. ${avg>=95?"You're exam-ready on accuracy.":"Keep practising: aim for 95% by "+esc(when)+"."}`}</p>`;
+}
+function hrLetter(){
+  const f=fundCalc();const name=$("#e-name").value.trim()||"[Your name]",id=$("#e-id").value.trim()||"[Employee ID]";
+  const sm=$("#e-start").value?new Date($("#e-start").value+"-01T12:00:00").toLocaleDateString("en-US",{month:"long",year:"numeric"}):"[start month]";
+  return `Subject: Payroll deduction authorization: certification exam fund
+
+To HR,
+
+I, ${name} (employee ID ${id}), voluntarily authorize a deduction of ${money(f.m)} per month from my pay, starting ${sm}, into my CodeRamp certification exam fund for the ${f.label}${f.mem?" plus one year of membership":""} (goal ${money(f.goal)}).${f.match?`\n\nI understand the company match is ${f.match*100}% (${money(f.m*f.match)} per month) under the company's training-benefit terms.`:""}
+
+At this rate the fund reaches the goal in about ${f.months} months.
+
+I understand that:
+- I can revoke this authorization in writing at any time, and deductions stop within one pay cycle.
+- Any unused balance will be refunded to me, including if I leave the company.
+- No deduction may reduce my pay below the applicable minimum wage or reduce overtime pay.
+
+Signed: ${name}
+Date: ${new Date().toLocaleDateString("en-US")}`;
+}
+$("#e-consent").addEventListener("change",e=>{$("#e-send").disabled=!e.target.checked});
+$("#e-send").onclick=()=>{
+  const f=fundCalc();if(!isFinite(f.months))return;const letter=hrLetter();const hr=$("#e-hr").value.trim();
+  store.deductions.unshift({id:Date.now(),name:$("#e-name").value.trim()||"Employee",amount:f.m,goal:f.goal,label:f.label,months:f.months,status:"Pending",when:new Date().toLocaleDateString()});save();
+  $("#e-status").textContent="Request logged for HR approval.";
+  const mail=`mailto:${encodeURIComponent(hr)}?subject=${encodeURIComponent("Payroll deduction authorization: certification exam fund")}&body=${encodeURIComponent(letter.replace(/^Subject:.*\n\n/,""))}`;
+  $("#e-letter").innerHTML=`<div class="stack"><p class="small muted">Signed authorization (keep a copy):</p><div class="letter" id="letter-text">${esc(letter)}</div><div class="actions"><a class="btn sm" href="${mail}">Open in my email</a><button class="btn ghost sm" type="button" id="copy-letter">Copy text</button><span class="small muted" id="copy-st"></span></div><p class="small muted">If the email button does nothing, copy the text and send it to HR yourself.</p></div>`;
+  $("#copy-letter").onclick=()=>{navigator.clipboard?.writeText(letter).then(()=>$("#copy-st").textContent="Copied.").catch(()=>{const r=document.createRange();r.selectNodeContents($("#letter-text"));const s=getSelection();s.removeAllRanges();s.addRange(r);$("#copy-st").textContent="Text selected. Press Ctrl+C."})};
+};
+
+/* ===== career ===== */
+function renderCareer(){
+  const end=$("#ceu-end");if(!end.value){const d=new Date();d.setFullYear(d.getFullYear()+1);end.value=d.toISOString().slice(0,10)}
+  renderCEU();renderRecord();renderQuiz();
+}
+["#ceu-have","#ceu-end"].forEach(s=>$(s).addEventListener("input",renderCEU));
+function renderCEU(){
+  const have=Math.max(0,+$("#ceu-have").value||0),left=Math.max(0,36-have);const end=new Date($("#ceu-end").value+"T12:00:00");
+  const months=Math.max(0,(end-new Date())/(30.44*864e5));const pace=months>0?(left/months):left;
+  $("#ceu-out").innerHTML=`<div class="bar" style="margin:6px 0"><i class="${have>=36?"good":"part"}" style="width:${Math.min(100,have/36*100)}%"></i></div>
+  <p><b>${left}</b> CEUs to go${months>0?` · about <b>${pace.toFixed(1)}</b> a month until ${end.toLocaleDateString("en-US",{month:"short",year:"numeric"})}`:""}.</p>
+  <p class="small muted">CodeRamp sends reminders at 6 months and 60 days before the cycle ends. Each issue of AAPC's member magazine quiz is worth 1 CEU.</p>`;
+}
+function renderRecord(){
+  const n=store.log.length;const avg=n?Math.round(store.log.reduce((s,l)=>s+l.pct,0)/n):0;
+  $("#record").innerHTML=n?`<p><b>${n}</b> charts logged · average <b>${avg}%</b> · ${store.log.filter(l=>l.pct>=95).length} at 95%+</p><div class="tablewrap"><table><thead><tr><th>Date</th><th>Chart</th><th>Accuracy</th></tr></thead><tbody>${store.log.slice(-5).reverse().map(l=>`<tr><td class="num">${l.when}</td><td>${esc(l.title)}</td><td class="num">${l.pct}%</td></tr>`).join("")}</tbody></table></div>`:`<p class="muted">No charts logged yet. Practice charts appear here.</p>`;
+}
+$("#export").onclick=()=>{const rows=[["date","chart","accuracy_pct","seconds"],...store.log.map(l=>[l.when,l.title,l.pct,l.secs])];const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="coderamp-record.csv";document.body.appendChild(a);a.click();a.remove()};
 const QUIZ=[
- ["Which modifier reports a significant, separately identifiable E/M service on the same day as a procedure?",["59","25","51","76"],1,"Modifier 25 goes on the E/M code. 59 is a distinct procedural service; 51 is multiple procedures; 76 is a repeat procedure by the same physician."],
- ["In ICD-10-CM injury codes, the 7th character \"A\" means:",["Initial encounter (active treatment)","Subsequent encounter","Sequela","Right side"],0,"A = active treatment, D = subsequent encounter during healing, S = sequela (late effect)."],
- ["Once a definitive diagnosis is established, its routine signs and symptoms should:",["Be listed first","Not be coded","Always be coded as secondary","Be coded with a Z code"],1,"Signs and symptoms that are routinely part of a confirmed diagnosis are not coded additionally."],
- ["Outpatient coding: a diagnosis documented as \"probable\" or \"rule out\" is:",["Coded as if confirmed","Not coded; code the signs and symptoms instead","Coded with modifier 59","Coded only when it is the primary reason"],1,"Uncertain diagnoses are not coded in the outpatient setting (this differs from inpatient rules)."],
- ["Under the 2021+ office E/M rules, the visit level is chosen by:",["History and exam","Medical decision making or total time on the date of the encounter","Time only","Counselling only"],1,"History and exam no longer set the level of office visits; MDM or total time does."],
- ["The \"X\" characters in W26.0XXA are there to:",["Mean unspecified","Hold places so the 7th character sits in position 7","Mark an external cause","Show laterality"],1,"Placeholder X is used when a code has fewer than 6 characters but needs a 7th character."],
- ["HCPCS Level II codes that begin with J mostly describe:",["Drugs given by methods other than by mouth","Durable medical equipment","Ambulance services","Laboratory tests"],0,"J codes cover drugs usually given by injection or infusion, often billed in units (e.g. J1885 per 15 mg)."],
+ ["Which modifier reports a significant, separately identifiable E/M service on the same day as a procedure?",["59","25","51","76"],1,"Modifier 25 goes on the E/M code. 59 is a distinct procedural service; 51 is multiple procedures; 76 is a repeat procedure."],
+ ["In ICD-10-CM injury codes, the 7th character \"A\" means:",["Initial encounter (active treatment)","Subsequent encounter","Sequela","Right side"],0,"A = active treatment, D = subsequent encounter during healing, S = sequela."],
+ ["Once a definitive diagnosis is established, its routine signs and symptoms should:",["Be listed first","Not be coded","Always be coded as secondary","Be coded with a Z code"],1,"Symptoms that are part of a confirmed diagnosis are not coded additionally."],
+ ["Outpatient coding: a diagnosis documented as \"probable\" or \"rule out\" is:",["Coded as if confirmed","Not coded; code the signs and symptoms instead","Coded with modifier 59","Coded only when primary"],1,"Uncertain diagnoses are not coded in the outpatient setting."],
+ ["Under the 2021+ office E/M rules, the visit level is chosen by:",["History and exam","Medical decision making or total time on the date of the encounter","Time only","Counselling only"],1,"MDM or total time sets the office visit level."],
+ ["The \"X\" characters in W26.0XXA are there to:",["Mean unspecified","Hold places so the 7th character sits in position 7","Mark an external cause","Show laterality"],1,"Placeholder X is used when a code needs a 7th character but has fewer than 6."],
+ ["HCPCS Level II codes beginning with J mostly describe:",["Drugs given other than by mouth","Durable medical equipment","Ambulance services","Laboratory tests"],0,"J codes cover drugs usually given by injection or infusion, often billed in units."],
  ["Ketorolac 60 mg IM, billed with J1885 (per 15 mg). How many units?",["1","2","4","60"],2,"60 ÷ 15 = 4 units."],
- ["Which is AHIMA's entry-level coding credential?",["CPC","CCA","CRC","CPMA"],1,"CCA (Certified Coding Associate) is AHIMA's entry credential; CPC is AAPC's core credential; CRC and CPMA are AAPC specialty credentials."]
+ ["Which is AHIMA's entry-level coding credential?",["CPC","CCA","CRC","CPMA"],1,"CCA is AHIMA's entry credential; CPC is AAPC's core credential."]
 ];
-function renderQuiz(){
-  let right=0;
+function renderQuiz(){let right=0;
   $("#quiz").innerHTML=QUIZ.map((q,i)=>{const pick=store.quiz[i];if(pick===q[2])right++;
     return `<div class="q"><b>${i+1}. ${esc(q[0])}</b><div class="opts">${q[1].map((o,j)=>{let cl="";if(pick!==undefined){if(j===q[2])cl="right";else if(j===pick)cl="wrong"}return `<button type="button" class="opt ${cl}" data-q="${i}" data-o="${j}"><span class="mono">${"ABCD"[j]}</span><span>${esc(o)}</span></button>`}).join("")}</div>${pick!==undefined?`<p class="expl">${esc(q[3])}</p>`:""}</div>`}).join("");
-  const done=Object.keys(store.quiz).length;$("#quiz-score").textContent=`${right} / ${QUIZ.length}`;
-  $("#quiz-score").className="pill "+(done<QUIZ.length?"part":pctClass(right/QUIZ.length*100));
-}
+  const done=Object.keys(store.quiz).length;$("#quiz-score").textContent=`${right} / ${QUIZ.length}`;$("#quiz-score").className="pill "+(done<QUIZ.length?"part":pctClass(right/QUIZ.length*100));}
 $("#quiz").addEventListener("click",e=>{const b=e.target.closest(".opt");if(!b)return;const i=+b.dataset.q;if(store.quiz[i]!==undefined)return;store.quiz[i]=+b.dataset.o;save();renderQuiz()});
 
-openCase();renderQuiz();renderDash();
+/* ===== trainer & HR ===== */
+const COHORT=[["Trainee A",96,5.1,"good","Ready for live charts"],["Trainee B",91,4.4,"part","On track"],["Trainee C",88,3.9,"bad","Inactive 6 days: check in"],["Trainee D",84,4.6,"part","On track"],["Trainee E",79,3.2,"bad","Accuracy falling 3 weeks"],["Trainee F",72,2.8,"bad","Needs coaching"]];
+function renderTeam(){
+  const at=Object.values(store.attempts);const n=at.length;const acc=n?Math.round(at.reduce((s,a)=>s+a.pct,0)/n):null;const hrs=at.reduce((s,a)=>s+a.secs,0)/3600;const cph=n?n/hrs:null;
+  $("#kpis").innerHTML=[[acc===null?"—":acc+"%","Your average accuracy (target 95%)"],[n+" / "+CASES.length,"Practice charts completed"],[store.questions.filter(q=>!q.reply).length,"Questions awaiting reply"],[store.deductions.filter(d=>d.status==="Pending").length,"Deductions awaiting approval"]].map(k=>`<div class="kpi"><span class="v">${k[0]}</span><span class="l">${k[1]}</span></div>`).join("");
+  const rows=COHORT.map(r=>({name:r[0],acc:r[1],cph:r[2],cls:r[3],sig:r[4]}));
+  if(n)rows.push({name:"You",acc,cph:+cph.toFixed(1),cls:pctClass(acc),sig:acc>=95?"Ready for live charts":acc>=80?"On track":"Needs coaching",you:true});
+  rows.sort((a,b)=>b.acc-a.acc);
+  $("#cohort").innerHTML=rows.map(r=>`<tr${r.you?' style="font-weight:700"':""}><td>${r.name}</td><td><div style="display:flex;gap:8px;align-items:center"><span class="num">${r.acc}%</span><div class="bar" style="flex:1"><i class="${pctClass(r.acc)}" style="width:${r.acc}%"></i></div></div></td><td class="num">${r.cph}</td><td><span class="pill ${r.cls}">${esc(r.sig)}</span></td></tr>`).join("");
+  const list=Object.entries(allLost()).sort((a,b)=>b[1]-a[1]);const top=list.length?list[0][1]:1;
+  $("#gaps").innerHTML=list.length?list.map(([k,v])=>`<div class="gap"><span>${esc(k)}</span><div class="bar"><i class="bad" style="width:${v/top*100}%"></i></div><span class="num">−${v}</span></div>`).join(""):`<p class="muted">No points lost yet. Check a few practice charts.</p>`;
+  $("#qs").innerHTML=store.questions.length?store.questions.map((q,i)=>`<div class="item"><p class="small muted">${esc(q.when)} · ${esc(q.case)} · <span class="mono">${esc(q.code)}</span></p><p>${esc(q.text)}</p>${q.reply?`<p class="pill good" style="align-self:flex-start">Answered</p><p class="small">${esc(q.reply)}</p>`:`<textarea aria-label="Reply" data-r="${i}" placeholder="Reply to the trainee"></textarea><div class="actions"><button class="btn sm" type="button" data-send="${i}">Send reply</button></div>`}</div>`).join(""):`<p class="muted">No questions yet. Trainees raise them with "Question this" on a scored chart.</p>`;
+  $("#qs").querySelectorAll("[data-send]").forEach(b=>b.onclick=()=>{const i=+b.dataset.send;const t=$("#qs").querySelector(`[data-r="${i}"]`).value.trim();if(!t)return;store.questions[i].reply=t;save();renderTeam()});
+  $("#deds").innerHTML=store.deductions.length?store.deductions.map((d,i)=>`<div class="item"><div class="block-h"><b>${esc(d.name)}</b><span class="pill ${d.status==="Approved"?"good":d.status==="Declined"?"bad":"part"}">${d.status}</span></div><p class="small">${money(d.amount)}/month toward ${esc(d.label)} (${money(d.goal)}) · about ${d.months} months · requested ${esc(d.when)}</p>${d.status==="Pending"?`<div class="actions"><button class="btn sm" type="button" data-ok="${i}">Approve</button><button class="btn ghost sm" type="button" data-no="${i}">Decline</button></div>`:""}</div>`).join("")+`<p class="small muted">Before approving: keep the signed authorization for at least 3 years, never let a deduction take pay below minimum wage or cut overtime, and check your state's rules (some require separate consent per deduction).</p>`:`<p class="muted">No requests yet. Employees send them from the Exam fund tab.</p>`;
+  $("#deds").querySelectorAll("[data-ok]").forEach(b=>b.onclick=()=>{store.deductions[+b.dataset.ok].status="Approved";save();renderTeam()});
+  $("#deds").querySelectorAll("[data-no]").forEach(b=>b.onclick=()=>{store.deductions[+b.dataset.no].status="Declined";save();renderTeam()});
+  $("#hires").innerHTML=store.hires.length?`<div class="tablewrap"><table><thead><tr><th>Candidate</th><th>Date</th><th>Accuracy</th><th>Time</th><th>Recommendation</th><th>Coach on</th></tr></thead><tbody>${store.hires.map(h=>`<tr><td>${esc(h.name)}</td><td class="num">${esc(h.when)}</td><td class="num">${h.avg}%</td><td class="num">${h.mins} min</td><td><span class="pill ${h.cls}">${esc(h.rec)}</span></td><td>${esc(h.weak.join(", ")||"—")}</td></tr>`).join("")}</tbody></table></div>`:`<p class="muted">No candidates tested yet. Run one from the Hiring test tab.</p>`;
+}
+
+/* ===== ROI ===== */
+["#r-team","#r-turn","#r-cost","#r-salary","#r-months","#r-price","#r-faster","#r-kept"].forEach(s=>$(s).addEventListener("input",renderROI));
+function renderROI(){
+  const v=s=>Math.max(0,+$(s).value||0);
+  const hires=Math.round(v("#r-team")*v("#r-turn")/100);const cost=hires*v("#r-months")*v("#r-price");
+  const ramp=hires*v("#r-faster")*(v("#r-salary")/12)*0.35;const kept=v("#r-kept")*v("#r-cost");const total=ramp+kept;
+  const mult=cost>0?total/cost:0;const replace=hires*v("#r-cost");
+  $("#roi-out").innerHTML=`<p class="small muted">Per year</p><p class="hero-num">${mult?mult.toFixed(1)+"×":"—"}</p><p>return on <b>${money(cost)}</b> of seats</p>
+  <div class="tablewrap"><table><tbody>
+  <tr><td>New hires a year</td><td class="num">${hires}</td></tr>
+  <tr><td>Current cost of replacing them</td><td class="num">${money(replace)}</td></tr>
+  <tr><td>Faster ramp (35% of a month's pay recovered per month saved)</td><td class="num">${money(ramp)}</td></tr>
+  <tr><td>Departures avoided</td><td class="num">${money(kept)}</td></tr>
+  <tr><td><b>Total value</b></td><td class="num"><b>${money(total)}</b></td></tr>
+  <tr><td>CodeRamp seats</td><td class="num">−${money(cost)}</td></tr>
+  <tr><td><b>Net</b></td><td class="num"><b>${money(total-cost)}</b></td></tr></tbody></table></div>
+  <p class="small muted">Estimate. The pilot measures the real ramp and retention change.</p>`;
+}
+
+/* ===== boot ===== */
+const sm=new Date();sm.setDate(1);sm.setMonth(sm.getMonth()+1);$("#e-start").value=`${sm.getFullYear()}-${String(sm.getMonth()+1).padStart(2,"0")}`;
+openCase();renderFund();renderROI();
 </script>
 </body>
 </html>
